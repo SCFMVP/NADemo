@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "27.0.3"
+
+    defaultConfig {
+        applicationId "com.example.administrator.nademo"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }/*
+    Error:duplicate files during packaging of APK E:\AndroidStudioProjects\huawei\NADemo\app\build\outputs\apk\app-debug-unaligned.apk
+	Path in archive: META-INF/DEPENDENCIES
+	Origin 1: E:\AndroidStudioProjects\huawei\NADemo\app\libs\httpmime-4.5.2.jar
+	Origin 2: E:\AndroidStudioProjects\huawei\NADemo\app\libs\httpcore-4.4.4.jar
+You can ignore those files in your build.gradle:
+	android {
+	  packagingOptions {
+	    exclude 'META-INF/DEPENDENCIES'
+	  }
+	}
+    */
+    //兼容一些版本较旧的包
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile files('libs/commons-codec-1.9.jar')
+    compile files('libs/Amap_2DMap_V5.2.0_20170627.jar')
+    compile files('libs/okhttp-3.2.0.jar')
+    //个人中心依赖
+    compile 'com.leon:lsettingviewlibrary:1.3.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+}
+
